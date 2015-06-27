@@ -13,12 +13,12 @@ Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgudev/%{version}/%{name}-%{version}.tar.xz
 # Source0-md5:	e4dee8f3f349e9372213d33887819a4d
 URL:		https://wiki.gnome.org/Projects/libgudev
-#BuildRequires:	autoconf >= 2.64
-#BuildRequires:	automake >= 1:1.11
+BuildRequires:	autoconf >= 2.64
+BuildRequires:	automake >= 1:1.11
 BuildRequires:	glib2-devel >= 1:2.22.0
 BuildRequires:	gobject-introspection-devel >= 1.31.1
 BuildRequires:	gtk-doc >= 1.18
-#BuildRequires:	libtool >= 2:2.2
+BuildRequires:	libtool >= 2:2.2
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	udev-devel >= 1:199

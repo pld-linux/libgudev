@@ -2,28 +2,31 @@
 # Conditional build:
 %bcond_without	apidocs		# API documentation
 %bcond_without	static_libs	# static library
+%bcond_without	tests		# tests (with umockdev)
 #
 Summary:	GObject bindings for libudev
 Summary(pl.UTF-8):	Wiązania GObject do libudev
 Name:		libgudev
-Version:	230
+Version:	231
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgudev/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	e4dee8f3f349e9372213d33887819a4d
+# Source0-md5:	916c10c51ec61131e244c3936bbb2e0c
+Patch0:		%{name}-tests.patch
 URL:		https://wiki.gnome.org/Projects/libgudev
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	glib2-devel >= 1:2.22.0
+BuildRequires:	glib2-devel >= 1:2.30.0
 BuildRequires:	gobject-introspection-devel >= 1.31.1
 BuildRequires:	gtk-doc >= 1.18
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	udev-devel >= 1:199
+%{?with_tests:BuildRequires:	umockdev-devel}
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.22.0
+Requires:	glib2 >= 1:2.30.0
 Requires:	udev-libs >= 1:199
 Provides:	udev-glib = 1:%{version}-%{release}
 Obsoletes:	udev-glib < 1:230
@@ -40,7 +43,7 @@ Summary:	Header files for libgudev library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libgudev
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.22.0
+Requires:	glib2-devel >= 1:2.30.0
 Requires:	udev-devel >= 1:199
 Provides:	udev-glib-devel = 1:%{version}-%{release}
 Obsoletes:	udev-glib-devel < 1:230
@@ -83,6 +86,7 @@ Dokumentacja API biblioteki libgudev.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 # rebuild ac/am/lt for as-needed to work
@@ -95,6 +99,7 @@ Dokumentacja API biblioteki libgudev.
 	%{?with_apidocs:--enable-gtk-doc} \
 	--disable-silent-rules \
 	%{?with_static_libs:--enable-static} \
+	%{!?with_tests:--disable-umockdev} \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 

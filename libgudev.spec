@@ -7,13 +7,12 @@
 Summary:	GObject bindings for libudev
 Summary(pl.UTF-8):	Wiązania GObject do libudev
 Name:		libgudev
-Version:	231
+Version:	232
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgudev/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	916c10c51ec61131e244c3936bbb2e0c
-Patch0:		%{name}-tests.patch
+# Source0-md5:	6914852377156665567abf8a38d89236
 URL:		https://wiki.gnome.org/Projects/libgudev
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
@@ -86,7 +85,6 @@ Dokumentacja API biblioteki libgudev.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 # rebuild ac/am/lt for as-needed to work

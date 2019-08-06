@@ -7,16 +7,16 @@
 Summary:	GObject bindings for libudev
 Summary(pl.UTF-8):	Wiązania GObject do libudev
 Name:		libgudev
-Version:	232
+Version:	233
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgudev/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	6914852377156665567abf8a38d89236
+# Source0-md5:	d59a317a40aaa02a2226056c0bb4d3e1
 URL:		https://wiki.gnome.org/Projects/libgudev
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	glib2-devel >= 1:2.30.0
+BuildRequires:	glib2-devel >= 1:2.38
 BuildRequires:	gobject-introspection-devel >= 1.31.1
 BuildRequires:	gtk-doc >= 1.18
 BuildRequires:	libtool >= 2:2.2
@@ -25,7 +25,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	udev-devel >= 1:199
 %{?with_tests:BuildRequires:	umockdev-devel}
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.30.0
+Requires:	glib2 >= 1:2.38
 Requires:	udev-libs >= 1:199
 Provides:	udev-glib = 1:%{version}-%{release}
 Obsoletes:	udev-glib < 1:230
@@ -42,7 +42,7 @@ Summary:	Header files for libgudev library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libgudev
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.30.0
+Requires:	glib2-devel >= 1:2.38
 Requires:	udev-devel >= 1:199
 Provides:	udev-glib-devel = 1:%{version}-%{release}
 Obsoletes:	udev-glib-devel < 1:230

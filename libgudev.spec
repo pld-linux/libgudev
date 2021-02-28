@@ -73,9 +73,7 @@ Summary(pl.UTF-8):	Dokumentacja API biblioteki libgudev
 Group:		Documentation
 Requires:	gtk-doc-common
 Obsoletes:	udev-glib-apidocs < 1:230
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for libgudev library.

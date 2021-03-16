@@ -1,0 +1,24 @@
+--- libgudev-236/meson.build.orig	2021-03-16 13:29:29.997178800 +0100
++++ libgudev-236/meson.build	2021-03-16 21:01:33.482761983 +0100
+@@ -34,7 +34,7 @@
+ typelibdir = join_paths(libdir, 'girepository-1.0')
+ pkgconfigdir = join_paths(libdir, 'pkgconfig')
+ girdir = join_paths(datadir, 'gir-1.0')
+-gtkdocdir = join_paths(datadir, 'gtk-doc')
++gtkdocdir = join_paths(datadir, 'doc', 'gtk-doc')
+ vapidir = join_paths(datadir, 'vala', 'vapi')
+ 
+ # Dependencies
+--- libgudev-236/docs/meson.build.orig	2021-03-16 13:29:29.996178900 +0100
++++ libgudev-236/docs/meson.build	2021-03-16 20:13:20.968432077 +0100
+@@ -1,8 +1,8 @@
+ glib_prefix = glib_dep.get_pkgconfig_variable('prefix')
+-glib_docpath = join_paths(glib_prefix, 'share', 'gtk-doc', 'html', 'glib')
++glib_docpath = join_paths(glib_prefix, 'share', 'doc', 'gtk-doc', 'html', 'glib')
+ 
+ gobject_prefix = gobject_dep.get_pkgconfig_variable('prefix')
+-gobject_docpath = join_paths(gobject_prefix, 'share', 'gtk-doc', 'html', 'gobject')
++gobject_docpath = join_paths(gobject_prefix, 'share', 'doc', 'gtk-doc', 'html', 'gobject')
+ 
+ libgudev_reference_ignored_h = [
+   'gudevenumtypes.h',

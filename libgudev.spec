@@ -7,23 +7,26 @@
 Summary:	GObject bindings for libudev
 Summary(pl.UTF-8):	Wiązania GObject do libudev
 Name:		libgudev
-Version:	234
+Version:	236
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgudev/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	386889d460003a4242a64cb47244a39a
+Source0:	https://download.gnome.org/sources/libgudev/%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	ad5a63bd88fe97189fec7b7afb2d4150
+Patch0:		%{name}-gtkdoc.patch
 URL:		https://wiki.gnome.org/Projects/libgudev
-BuildRequires:	autoconf >= 2.64
-BuildRequires:	automake >= 1:1.11
 BuildRequires:	glib2-devel >= 1:2.38
 BuildRequires:	gobject-introspection-devel >= 1.31.1
 BuildRequires:	gtk-doc >= 1.18
-BuildRequires:	libtool >= 2:2.2
+BuildRequires:	meson >= 0.53.0
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	udev-devel >= 1:199
 %{?with_tests:BuildRequires:	umockdev-devel}
+BuildRequires:	vala >= 2:0.38.0
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.38
 Requires:	udev-libs >= 1:199
@@ -67,6 +70,19 @@ Static libgudev library.
 %description static -l pl.UTF-8
 Statyczna biblioteka libgudev.
 
+%package -n vala-libgudev
+Summary:	Vala API for libgudev library
+Summary(pl.UTF-8):	API języka Vala do biblioteki libgudev
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	vala >= 2:0.38.0
+
+%description -n vala-libgudev
+Vala API for libgudev library.
+
+%description -n vala-libgudev -l pl.UTF-8
+API języka Vala do biblioteki libgudev.
+
 %package apidocs
 Summary:	libgudev API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libgudev
@@ -83,30 +99,19 @@ Dokumentacja API biblioteki libgudev.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-# rebuild ac/am/lt for as-needed to work
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	%{?with_apidocs:--enable-gtk-doc} \
-	--disable-silent-rules \
-	%{?with_static_libs:--enable-static} \
-	%{!?with_tests:--disable-umockdev} \
-	--with-html-dir=%{_gtkdocdir}
-%{__make}
+%meson build \
+	%{?with_apidocs:-Dgtk_doc=true} \
+	%{!?with_tests:-Dtests=false}
+
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
-
-# obsoleted by pkg-config
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libgudev-1.0.la
+%ninja_install -C build
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -133,6 +138,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libgudev-1.0.a
 %endif
+
+%files -n vala-libgudev
+%defattr(644,root,root,755)
+%{_datadir}/vala/vapi/gudev-1.0.deps
+%{_datadir}/vala/vapi/gudev-1.0.vapi
 
 %if %{with apidocs}
 %files apidocs

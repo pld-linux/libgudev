@@ -104,7 +104,7 @@ Dokumentacja API biblioteki libgudev.
 %build
 %meson build \
 	%{?with_apidocs:-Dgtk_doc=true} \
-	%{!?with_tests:-Dtests=false}
+	%{!?with_tests:-Dtests=disabled}
 
 %ninja_build -C build
 

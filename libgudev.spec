@@ -7,12 +7,12 @@
 Summary:	GObject bindings for libudev
 Summary(pl.UTF-8):	Wiązania GObject do libudev
 Name:		libgudev
-Version:	236
+Version:	237
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/libgudev/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	ad5a63bd88fe97189fec7b7afb2d4150
+# Source0-md5:	a7783083cd74957d3a727ddc4737ee84
 Patch0:		%{name}-gtkdoc.patch
 URL:		https://wiki.gnome.org/Projects/libgudev
 BuildRequires:	glib2-devel >= 1:2.38
@@ -121,7 +121,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc NEWS README
+%doc NEWS README.md
 %attr(755,root,root) %{_libdir}/libgudev-1.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgudev-1.0.so.0
 %{_libdir}/girepository-1.0/GUdev-1.0.typelib

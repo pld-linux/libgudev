@@ -16,20 +16,20 @@ Source0:	https://download.gnome.org/sources/libgudev/%{version}/%{name}-%{versio
 Patch0:		%{name}-gtkdoc.patch
 URL:		https://wiki.gnome.org/Projects/libgudev
 BuildRequires:	glib2-devel >= 1:2.38
-BuildRequires:	gobject-introspection-devel >= 1.31.1
-BuildRequires:	gtk-doc >= 1.18
+BuildRequires:	gobject-introspection-devel
+BuildRequires:	gtk-doc
 BuildRequires:	meson >= 0.53.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	udev-devel >= 1:199
+BuildRequires:	udev-devel >= 1:251
 %{?with_tests:BuildRequires:	umockdev-devel}
-BuildRequires:	vala >= 2:0.38.0
+BuildRequires:	vala
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.38
-Requires:	udev-libs >= 1:199
+Requires:	udev-libs >= 1:251
 Provides:	udev-glib = 1:%{version}-%{release}
 Obsoletes:	udev-glib < 1:230
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -46,7 +46,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libgudev
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.38
-Requires:	udev-devel >= 1:199
+Requires:	udev-devel >= 1:251
 Provides:	udev-glib-devel = 1:%{version}-%{release}
 Obsoletes:	udev-glib-devel < 1:230
 
